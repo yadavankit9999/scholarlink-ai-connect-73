@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Plus, Users, Briefcase, Star, MessageCircle, Filter, Bell } from 'lucide-react';
+import { Plus, Users, Briefcase, Star, MessageCircle, Filter, Bell, Settings, Bot, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -89,10 +88,25 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
             <h1 className="text-2xl font-bold text-gray-900">Welcome back, Dr. Chen!</h1>
             <p className="text-gray-600">Manage your research opportunities and connect with students</p>
           </div>
-          <Button variant="ghost" size="sm" className="relative p-2">
-            <Bell className="w-6 h-6" />
-            <div className="absolute -top-1 -right-1 bg-red-500 rounded-full w-3 h-3"></div>
-          </Button>
+          <div className="flex space-x-2">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="relative p-2"
+              onClick={() => onNavigate('messages')}
+            >
+              <MessageCircle className="w-6 h-6" />
+              <div className="absolute -top-1 -right-1 bg-red-500 rounded-full w-3 h-3"></div>
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="relative p-2"
+              onClick={() => onNavigate('profile')}
+            >
+              <Settings className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
 
         {/* Quick Stats */}
@@ -145,7 +159,7 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
               <div className="grid grid-cols-2 gap-4">
                 <Button 
                   className="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl flex flex-col items-center space-y-2"
-                  onClick={() => onNavigate('post-position')}
+                  onClick={() => onNavigate('post-job')}
                 >
                   <Plus className="w-8 h-8" />
                   <span className="font-semibold">Post New Position</span>
@@ -153,10 +167,28 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
                 <Button 
                   variant="outline" 
                   className="p-6 rounded-2xl flex flex-col items-center space-y-2"
-                  onClick={() => setActiveTab('suggested')}
+                  onClick={() => onNavigate('ai-talent')}
                 >
                   <Star className="w-8 h-8" />
-                  <span className="font-semibold">View Suggestions</span>
+                  <span className="font-semibold">AI Talent Finder</span>
+                </Button>
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <Button 
+                  variant="outline" 
+                  className="p-6 rounded-2xl flex flex-col items-center space-y-2"
+                  onClick={() => onNavigate('connections')}
+                >
+                  <Users className="w-8 h-8" />
+                  <span className="font-semibold">Find Collaborators</span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="p-6 rounded-2xl flex flex-col items-center space-y-2"
+                  onClick={() => onNavigate('ai-insights')}
+                >
+                  <TrendingUp className="w-8 h-8" />
+                  <span className="font-semibold">AI Insights</span>
                 </Button>
               </div>
             </div>
@@ -243,7 +275,12 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
                       <Button size="sm" variant="outline" className="rounded-xl">
                         View Profile
                       </Button>
-                      <Button size="sm" variant="outline" className="rounded-xl">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="rounded-xl"
+                        onClick={() => onNavigate('messages')}
+                      >
                         Message
                       </Button>
                     </div>
@@ -302,6 +339,14 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
                 </div>
               </div>
             ))}
+            
+            <Button 
+              variant="outline" 
+              className="w-full py-3 rounded-2xl"
+              onClick={() => onNavigate('ai-talent')}
+            >
+              View All AI Suggestions
+            </Button>
           </div>
         )}
 
@@ -310,7 +355,10 @@ const ProfessorDashboard = ({ onNavigate }: ProfessorDashboardProps) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">My Positions</h2>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl">
+              <Button 
+                className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+                onClick={() => onNavigate('post-job')}
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Post New
               </Button>

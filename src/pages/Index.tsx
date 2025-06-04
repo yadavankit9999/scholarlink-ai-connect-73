@@ -6,6 +6,12 @@ import HomeDashboard from '@/components/HomeDashboard';
 import ExpertSearch from '@/components/ExpertSearch';
 import JobsScreen from '@/components/JobsScreen';
 import ProfessorDashboard from '@/components/ProfessorDashboard';
+import PostJobScreen from '@/components/PostJobScreen';
+import AITalentMatchmaker from '@/components/AITalentMatchmaker';
+import ConnectionsScreen from '@/components/ConnectionsScreen';
+import MessagesScreen from '@/components/MessagesScreen';
+import ProfileManagementScreen from '@/components/ProfileManagementScreen';
+import AIInsightsScreen from '@/components/AIInsightsScreen';
 
 const Index = () => {
   const [currentScreen, setCurrentScreen] = useState('welcome');
@@ -39,6 +45,24 @@ const Index = () => {
       
       case 'professor-dashboard':
         return <ProfessorDashboard onNavigate={navigateToScreen} />;
+      
+      case 'post-job':
+        return <PostJobScreen onBack={() => setCurrentScreen('professor-dashboard')} />;
+      
+      case 'ai-talent':
+        return <AITalentMatchmaker onBack={() => setCurrentScreen('professor-dashboard')} />;
+      
+      case 'connections':
+        return <ConnectionsScreen onBack={() => setCurrentScreen('professor-dashboard')} />;
+      
+      case 'messages':
+        return <MessagesScreen onBack={() => setCurrentScreen('professor-dashboard')} />;
+      
+      case 'profile':
+        return <ProfileManagementScreen onBack={() => setCurrentScreen('professor-dashboard')} />;
+      
+      case 'ai-insights':
+        return <AIInsightsScreen onBack={() => setCurrentScreen('professor-dashboard')} />;
       
       default:
         return <HomeDashboard onNavigate={navigateToScreen} />;
