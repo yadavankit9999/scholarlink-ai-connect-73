@@ -108,13 +108,21 @@ const Index = () => {
                 </button>
                 <button
                   onClick={() => setCurrentScreen('student-profile')}
-                  className="px-3 py-1 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                    currentScreen === 'student-profile' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
                   Student Profile
                 </button>
                 <button
                   onClick={() => setCurrentScreen('professor-profile')}
-                  className="px-3 py-1 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                    currentScreen === 'professor-profile' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                 >
                   Professor Profile
                 </button>
@@ -122,10 +130,17 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-2">
+              <div className="text-xs text-gray-500 hidden sm:block">
+                Current view: {userType === 'student' ? 'Student' : 'Professor'}
+              </div>
               <button
                 onClick={() => {
-                  setUserType(userType === 'student' ? 'professor' : 'student');
-                  setCurrentScreen(userType === 'student' ? 'professor-dashboard' : 'home');
+                  const newUserType = userType === 'student' ? 'professor' : 'student';
+                  setUserType(newUserType);
+                  // Switch to appropriate dashboard when changing user type
+                  if (currentScreen === 'home' || currentScreen === 'professor-dashboard') {
+                    setCurrentScreen(newUserType === 'student' ? 'home' : 'professor-dashboard');
+                  }
                 }}
                 className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
